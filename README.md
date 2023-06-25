@@ -7,3 +7,5 @@ Plantilla FrontEnd, configurada con el framework Quasar y VueJS con TypeScript,V
 3. TypeScript
 4. Pinia
 5. Bus
+# FrontEnd-Backend
+Incluye seguridad JWT, desde configuración del backend del API()
