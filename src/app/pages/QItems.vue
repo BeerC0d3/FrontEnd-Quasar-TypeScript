@@ -1,64 +1,67 @@
 <template>
   <q-page padding>
     <page-header>
-      <template #title>QItemsX</template>
+      <template #title>QItem</template>
     </page-header>
     <page-body>
-      <q-list bordered>
-        <q-item
-          v-for="contact in contacts"
-          :key="contact.id"
-          class="q-my-sm"
-          clickable
-          v-ripple
-        >
-          <q-item-section avatar>
-            <q-avatar color="primary" text-color="white">
-              {{ contact.letter }}
-            </q-avatar>
-          </q-item-section>
-
-          <q-item-section>
-            <q-item-label>{{ contact.name }}</q-item-label>
-            <q-item-label caption lines="1">{{ contact.email }}</q-item-label>
-          </q-item-section>
-
-          <q-item-section side>
-            <q-icon name="chat_bubble" color="primary" />
-          </q-item-section>
-        </q-item>
-
+      <div class="q-pa-lg">
+        <q-btn color="primary" icon="fa-solid fa-plus" @click="showModal" />
         <q-separator />
-        <q-item-label header>Offline</q-item-label>
+        <q-list bordered>
+          <q-item v-for="contact in contacts" :key="contact.id" class="q-my-sm" clickable v-ripple>
+            <q-item-section avatar>
+              <q-avatar color="primary" text-color="white">
+                {{ contact.letter }}
+              </q-avatar>
+            </q-item-section>
 
-        <q-item
-          v-for="contact in offline"
-          :key="contact.id"
-          class="q-mb-sm"
-          clickable
-          v-ripple
-        >
-          <q-item-section avatar>
-            <q-avatar>
-              <img :src="`https://cdn.quasar.dev/img/${contact.avatar}`" />
-            </q-avatar>
-          </q-item-section>
+            <q-item-section>
+              <q-item-label>{{ contact.name }}</q-item-label>
+              <q-item-label caption lines="1">{{ contact.email }}</q-item-label>
+            </q-item-section>
 
-          <q-item-section>
-            <q-item-label>{{ contact.name }}</q-item-label>
-            <q-item-label caption lines="1">{{ contact.email }}</q-item-label>
-          </q-item-section>
+            <q-item-section side>
+              <q-icon name="chat_bubble" color="primary" />
+            </q-item-section>
+          </q-item>
 
-          <q-item-section side>
-            <q-icon name="chat_bubble" color="grey" />
-          </q-item-section>
-        </q-item>
-      </q-list>
+          <q-separator />
+          <q-item-label header>Offline</q-item-label>
+
+          <q-item v-for="contact in offline" :key="contact.id" class="q-mb-sm" clickable v-ripple>
+            <q-item-section avatar>
+              <q-avatar>
+                <img :src="`https://cdn.quasar.dev/img/${contact.avatar}`" />
+              </q-avatar>
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>{{ contact.name }}</q-item-label>
+              <q-item-label caption lines="1">{{ contact.email }}</q-item-label>
+            </q-item-section>
+
+            <q-item-section side>
+              <q-icon name="chat_bubble" color="grey" />
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </div>
     </page-body>
     <page-footer />
+    <q-dialog v-model="showAdd" persistent>
+      <frmExample @close="showAdd = false" />
+    </q-dialog>
   </q-page>
 </template>
 <script setup lang="ts">
+import { ref } from 'vue';
+import frmExample from '../components/frmExample.vue'
+
+const showAdd = ref(false);
+const showModal = () => {
+  showAdd.value = true;
+};
+
 const contacts = [
   {
     id: 1,

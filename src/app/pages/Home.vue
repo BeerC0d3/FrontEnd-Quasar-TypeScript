@@ -7,6 +7,7 @@
       <template #title>Inicio</template>
     </page-header>
     <page-body>
+      <h3>Hola mundo</h3>
       <div class="q-pa-lg">
         <p v-for="i in 20" :key="i">
           Lorems ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate
